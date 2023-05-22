@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Url RPA checker", "Url RAP checker\Url RPA checker.csproj", "{A1C91E4D-D6D8-40BA-85DB-D1544B519352}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1C91E4D-D6D8-40BA-85DB-D1544B519352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C91E4D-D6D8-40BA-85DB-D1544B519352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C91E4D-D6D8-40BA-85DB-D1544B519352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C91E4D-D6D8-40BA-85DB-D1544B519352}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B15E841F-07C3-478E-9223-7978C8D2186C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Checker</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/select2-bootstrap-5-theme.css">
+</head>
+<body>
+
+    <!-- start header -->
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="box-logo"><img src="img/logo.png" alt=""></div>
+
+
+        
+        <div class="box-btns">
+            <button type="button" class="btn-outline-secondary" style="forced-color-adjust:red!important;" aria-label="Close" onclick=" window.location  = './Admin_panel.html?version='+version;">Log Out</button>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- start infobox -->
+    <!-- end infobox -->
+    <div>
+
+
+    </div>
+    <!-- start jobs box -->
+    <!-- <div class="box-shadow" style="margin-left: 20px;margin-right: 20px;margin-top:20px;margin-bottom: 20px;padding-bottom: 5px;padding-left: 5px;padding-right: 5px;">-->
+    </div>
+
+    <div class="bg-position">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="head-position d-flex">
+                        <div class="col-10">
+                            <h3>Name </h3>
+                            <input id='NameUrl' type="text" class="form-control">
+                            <h3>Url </h3>
+                            <input id='UrlInput' type="text" class="form-control">
+                            <h3>Check Result </h3>
+                            <input id='Result' type="text" class="form-control" readonly="readonly">
+                        </div>
+                        <div class="col-10" style="padding-top: 2.3%;">
+                            <button type="button" class="btn btn btn-primary" onclick="save();">+</button>
+
+                        </div>
+
+                    </div>
+                    <div class="head-position d-flex"><h3></h3></div>
+                    <section style="overflow-x: auto;height: 350px;overflow-y: auto;">
+                        <table class="table-form table-data">
+                            <thead style="position: sticky;align-self: flex-start;top:0">
+                                <tr>
+                                    
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Url</th>
+                                    <th>Result Check</th>
+                                    <th>Last time check</th>
+                                    <th>Interval</th>
+                                    <th>Opration</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody id="data_view">
+                                <tr>
+                                    <td>1</td>
+                                    <td>google</td>
+                                    <td>http://www.google.com</td>
+                                    <td>sdas dsad asdasd sad sad sad asda sd</td>
+                                    <td>5213213 1321321321 </td>
+                                    <td>5</td>
+                                   
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Url_editModal" data-bs-whatever="1" style="margin-right: 5px;">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="Delete(1,1);">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    </div>
+    <!-- end modal -->
+    <!--start URL Edite Modal -->
+    <div class="modal fade" id="Url_editModal" tabindex="-1" aria-labelledby="Url_editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Url_editModalLabel">Information of Url</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-12">
+                        <label for="Name" class="col-form-label">Name:</label>
+                        <input id='name' type="text" class="form-control">
+                        <span class="error_"><p class="error_" id="name_error"></p></span>
+                    </div>
+                    <div class="col-12">
+                        <label for="Url" class="col-form-label">Url:</label>
+                        <input id='url' type="text" class="form-control">
+                        <span class="error_"><p class="error_" id="url_error"></p></span>
+                    </div>
+                    <div class="col-5">
+                        <label for="Time" class="col-form-label">Interval Time:</label>
+                        <input id='time' type="text" class="form-control" placeholder="00:00">
+                        <span class="error_"><p class="error_" id="houre_error"></p></span>
+                        
+                    </div>
+                    
+                
+                    
+                    <!-- <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="1">Employer Info</button> -->
+                </div>
+                <div class="modal-footer" style="direction: rtl;">
+                    <button class="btn btn-primary" style="margin-top:38px;" type="button" onclick="update_Url();">Edit</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <!-- end modal -->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      
+
+
+var version='';
+    $(document).ready(function () {
+
+     // $("#data_view").empty();
+     // $("#data_view1").empty();
+      var urlParams = new URLSearchParams(window.location.search);
+      version = urlParams.get('version');
+      show_data();
+
+    });
+ //-------------------
+ // information modal
+ //-------------------
+        let idUrl = 0;
+        let flag;
+var Url_editModal = document.getElementById('Url_editModal');
+        Url_editModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            flag = false;
+            var recipient = button.getAttribute('data-bs-whatever');
+            var modalTitle = Url_editModal.querySelector('.modal-title');
+            modalTitle.textContent = 'Information of selected Url ';
+            idUrl = recipient;
+
+
+            document.getElementById("name").value = decodeURIComponent(dataGrid[idUrl].name);
+            document.getElementById("url").value = decodeURIComponent(dataGrid[idUrl].urlCheck);
+            document.getElementById("time").value = decodeURIComponent(dataGrid[idUrl].intervalCheck);
+            document.getElementById("houre_error").textContent = '';
+        });
+
+        //-----------------------
+ // End information modal
+ //-----------------------
+    function update_Url()
+    {
+
+        flag = false;
+        if (document.getElementById("time").value.length == 5 && document.getElementById("time").value.includes(":"))
+                flag = true;
+            else
+              document.getElementById("houre_error").textContent="Time is not tru format example 12:06";
+        if (flag) {
+            $.ajax({
+                url: "https://localhost:44394/api/Url/update?Email=" + localStorage.getItem('Email') + "&UrlCheck=" + dataGrid[idUrl].urlCheck,
+                type: 'PUT',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('Token')
+                },
+                data: JSON.stringify({
+                    Email: localStorage.getItem('Email'),
+                    Name: document.getElementById("name").value,
+                    UrlCheck: document.getElementById("url").value,
+                    ResultCheck: "-",
+                    IntervalCheck: document.getElementById("time").value
+                }),
+                success: function (response) {
+                    show_data();
+                     alert("Update  sucsessfull");
+                   
+                },
+                error: function (xhr, status, error) {
+                    alert("Update not sucsessfull");
+                }
+            });
+        }
+    }
+   
+    //oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    function show_data()
+    {
+        // $("#data_view").empty();
+      var all="";
+
+     $.ajax({
+            url: "https://localhost:44394/api/Url/ShowAll?Email="+localStorage.getItem('Email'),
+            dataType: 'json',
+            type: "GET",
+         contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            headers: {
+    "Authorization": "Bearer "+localStorage.getItem('Token')
+                     },
+
+            success: function(data) {
+              $("#data_view").empty();
+                showList(data);
+
+            },
+             error: function() {
+                $("#results").append("error");
+
+            }
+        });
+
+
+        }
+
+        let dataGrid = [];
+        function showList(data) {
+            let s = ""; 
+            dataGrid = [];
+for (let i = 0; i < data.length; i++) {
+    const key = data[i];
+    let name=key.name !== null ? key.name : '-';
+    let urlCheck = key.urlCheck !== null ? key.urlCheck : '-';
+    let resultCheck = key.resultCheck !== null ? key.resultCheck : '-';
+    let intervalCheck = key.intervalCheck !== null ? key.intervalCheck : '-:-';
+    let lastTimeCheck = key.lastTimeCheck !== null ? key.lastTimeCheck : '-';
+    dataGrid.push({id: key.id,name:decodeURIComponent(name), urlCheck: decodeURIComponent(urlCheck),resultCheck: resultCheck, intervalCheck: intervalCheck,lastTimeCheck:lastTimeCheck});
+    s = s + "<tr><td>" + key.id + "</td>" +
+             "<td>"+name+"</td>"+
+              "<td>"+urlCheck+"</td>"+
+             "<td>" +resultCheck+ "</td>" +
+             "<td>" + lastTimeCheck + "</td>" +
+             "<td>"+intervalCheck+"</td>"+
+                    "<td>" +
+                    "<button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#Url_editModal\" data-bs-whatever=\"" + i + "\" style = \"margin-right: 5px; \" > "+
+                    "Edit"+
+                    "</button>"+
+                     "<button type=\"button\" class=\"btn btn-outline-secondary\" onclick=\"Delete("+key.id+",'"+urlCheck+"');\">Delete</button>"+
+                   "</td>"+
+                    "</tr>"
+            }
+            $("#data_view").append(s);
+
+        }
+
+        function Delete(id, urlCheck) {
+            
+                 $.ajax({
+                    url: 'https://localhost:44394/api/Url/Delete',
+                    type: 'DELETE',
+                    dataType: 'json',
+                     contentType: 'application/json',
+                     headers: {
+                         "Authorization": "Bearer "+localStorage.getItem('Token')
+                     },
+                    data: JSON.stringify({ Id: id, Url: urlCheck }),
+                    success: function (response) {
+                       show_data();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Delete not sucsessfull");
+                    }
+                });
+        }
+
+        function save() {
+            
+                 $.ajax({
+                    url: 'https://localhost:44394/api/Url/check',
+                    type: 'POST',
+                    dataType: 'json',
+                     contentType: 'application/json',
+                     headers: {
+                         "Authorization": "Bearer " + localStorage.getItem('Token'),
+                         "Content-Type": "application/json"
+                     },
+                    data: JSON.stringify({ Email: localStorage.getItem('Email'),
+    Name:  document.getElementById("NameUrl").value,
+    UrlCheck: document.getElementById("UrlInput").value,
+    ResultCheck: "-",
+    IntervalCheck: "-:-" }),
+                     success: function (response) {
+                         document.getElementById("Result").value = response;
+                       show_data();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Delete not sucsessfull");
+                    }
+                });
+        }
+
+
+    </script>
+
+</body>
+</html>

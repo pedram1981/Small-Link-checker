@@ -1,0 +1,361 @@
+@font-face {
+    font-family: roboto;
+    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: roboto-bl;
+    src: url('../fonts/Roboto/Roboto-Bold.ttf');
+}
+@font-face {
+    font-family: roboto-md;
+    src: url('../fonts/Roboto/Roboto-Medium.ttf');
+}
+
+header {
+    padding:21px 30px;
+    border-bottom: 1px solid rgb(180, 180, 180);
+    background-color: #003184;
+    display: flex;
+}
+.box-logo img {
+  width: 90px;
+}
+.box-txt {
+    font-size: 20px;
+    color: #000000;
+    font-family: roboto-bl;
+}
+.box-btns .logout {
+    background-color: rgb(255, 71, 21);
+    border:1px solid rgb(255, 71, 21);
+    color: #f2f0f0;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-family: roboto-md;
+    transition: all .3s;
+}
+/* .box-btns .logout:hover {
+    background-color: rgb(255, 71, 21);
+    color: #;
+} */
+.box-btns .addemployer,
+.box-btns .selectall {
+    border: 1px solid #f2f0f0;
+    color: #f2f0f0;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 4px 10px;
+    font-family: roboto-md;
+    transition: all .3s;
+}
+.box-btns .addemployer:hover,
+.box-btns .selectall:hover {
+    background-color: #f2f0f0;
+    color: #2662bd;
+}
+.boxinfo {
+    background-color: #2662bd14;
+    border-radius: 10px;
+    padding: 30px 25px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 90%;
+    box-shadow:0px 3px 16px #3333334d;
+}
+.boxinfo2 {
+    display: block;
+    width: 100%;
+}
+.boxinfo2 .casein {
+    display: inline-block;
+    margin: 10px 10px;
+}
+.casein span:nth-child(1) {
+    font-family: roboto-bl;
+    font-size:16px;
+    color: #333333e6;
+}
+.casein span:nth-child(2) {
+    font-family: roboto;
+    font-size:16px;
+    color: #333c;
+}
+.bg-position {
+    margin-top: 20px;
+}
+.head-position h3 {
+    font-family: roboto-bl;
+    font-size: 18px;
+}
+.editbtn {
+    border: 1px solid rgb(15, 119, 236);
+    color: rgb(15, 119, 236);
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 4px 10px;
+    font-family: roboto-md;
+}
+.deletebtn {
+    border: 1px solid rgb(255, 21, 60);
+    color: rgb(255, 21, 60);
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 4px 10px;
+    font-family: roboto-md;
+}
+.addbtn {
+    border: 1px solid rgb(15, 119, 236);
+    color: rgb(15, 119, 236);
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 4px 10px;
+    margin-left: 30px;
+    font-family: roboto-md;  
+}
+.formbase input,
+.formbase select {
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: roboto;
+    color: rgb(90, 90, 90);
+    border: 1px solid rgba(90, 90, 90, 0.315);
+    padding: 5px 10px;
+    margin: 5px;
+}
+.formbase select {
+    width: 205px;
+}
+.formbase .addf {
+    border: 1px solid #2662bd;
+    background-color: #2662bd;
+    font-size: 16px;
+    color: #f2f0f0;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-family: roboto-md;  
+    margin-top: 20px;
+    transition: all .3s;
+} 
+.formbase .addf:hover {
+    background-color: transparent;
+    color: #2662bd;
+}
+.formbase .btn-secondary {
+    font-family: roboto-md;
+    transition: all .3s;
+}
+.formbase .btn-secondary:hover {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: #6c757d;
+}
+.readmore {
+    border: 1px solid transparent;
+    color: #2662bd;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 4px 10px;
+    margin-left: 30px;
+    font-family: roboto-md;     
+}
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+  }
+
+
+
+
+.table-form {
+    width: 100%;
+}
+ .error_{
+     color: red;
+     font-size: small;
+ }
+.table-form { overflow-x: scroll; }
+.td-100 {
+    min-width: 100px;
+}
+.td-170 {
+    min-width: 170px;
+}
+.td-180 {
+    min-width: 180px;
+}
+.td-190 {
+    min-width: 220px;
+}
+.td-250 {
+    min-width: 250px;
+}
+
+.tblcss{
+    background-color:goldenrod/* You can use any color of you choice here */
+  }
+
+.table-form th {
+    background-color: #2662bd;
+    color: #f2f0f0;
+    font-family: roboto;
+    padding: 6px 6px;
+    border-right: 1px solid #f2f0f0;
+}
+
+.table-form td {
+    font-family: roboto;
+    padding: 10px 5px;
+    background-color: #ffffff14;
+    border: 1px solid  #2662bd4f;
+}
+
+.box-shadow
+    {
+        -webkit-box-shadow: 0 20px 40px rgba(72,78,85,.6);
+        box-shadow: 0 20px 40px rgba(72,78,85,.6);
+        -webkit-transform: translateY(-15px);
+        -moz-transform: translateY(-15px);
+        -ms-transform: translateY(-15px);
+        -o-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+
+.btn-del {
+    background-color:rgb(255, 71, 21);
+        border: 1px solid rgb(255, 71, 21);
+        color:#f2f0f0;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 4px 10px;
+        font-family: roboto-md;
+        width: 100%;
+        margin-top: 10px;
+}
+.btn-edit {
+    border: 1px solid #2662bd;
+    background-color:transparent;
+    font-size: 16px;
+    color: #2662bd;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-family: roboto-md;
+    transition: all .3s;
+    width: 100%;
+}
+.btn-edit:hover {
+    color: #f2f0f0;
+    border-color: #f2f0f0;
+    background-color: #2662bd;
+}
+.btn-jobs {
+    border: 1px solid #2662bd;
+    background-color:transparent;
+    font-size: 16px;
+    color: #2662bd;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-family: roboto-md;
+    transition: all .3s;  
+    box-shadow:0px 5px 8px #808080a1;
+}
+.btn-jobs:hover {
+    color: #f2f0f0;
+    border-color: #2662bd;
+    background-color: #2662bd;
+}
+.head-jobs {
+    margin-bottom: 20px;
+}
+.jobs-txt {
+    font-family: roboto-bl;
+    font-size: 17px;
+    color: #333;
+    margin-right: 20px;
+    position: relative;
+}
+.jobs-txt::after {
+    bottom: -3px;
+    border-radius: 3px;
+    left: 0;
+    display: inline-block;
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: #333;
+}
+.modal-content {
+    font-family: roboto;
+}
+
+/* -----------------------------------responsive */
+@media only screen  and (max-width:992px) {
+    .table-form {
+        margin-bottom: 30px;
+    }
+}
+@media only screen  and (max-width:768px) {
+    .logout2 {
+        margin-bottom: 10px;
+    }
+    header {
+        display: block!important;
+    }
+    .box-logo {
+        display: inline-block;
+    }
+    .box-txt {
+        display: inline-block;
+        margin-left: 30px;
+    }
+    .box-btns {
+        margin-top: 20px;
+    }
+    .box-btns .addemployer, .box-btns .selectall {
+        margin-right: 10px;
+    }
+    .box-txt {
+        font-size: 18px;
+    }
+    .boxinfo {
+        width: 100%;
+        display:block;
+    }
+    .boxinfo .casein {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+    .table-form {
+        overflow-x: auto!important;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+}
+
+@media only screen  and (max-width:382px) {
+    .box-btns .addemployer, .box-btns .selectall {
+        margin-right: 0px;
+    }
+    .box-btns .addemployer, .box-btns .selectall, .box-btns .logout {
+        font-size: 14px;
+    }
+    .box-txt2 {
+        margin-left: 0;
+    }
+}

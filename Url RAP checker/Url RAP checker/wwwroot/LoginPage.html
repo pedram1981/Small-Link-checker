@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- start header -->
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="box-logo"><img src="img/logo.png" alt=""></div>
+
+
+
+        <div class="box-btns">
+            <!--  <button type="button" class="btn-close"  style="forced-color-adjust:red!important;"aria-label="Close"></button>-->
+        </div>
+    </header>
+    <section class="vh-100" style="background-color: #508bfc;">
+        <div class="container py-5 h-100" style="padding-top: 0px!important;">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">Sign in</h3>
+                            <div class="col-1">
+                                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            </div>
+                            <div class="form-outline mb-2">
+
+                                <input type="email" class="form-control form-control-lg" id="typeEmailX-2" placeholder="name@example.com">
+
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Password</label>
+                            </div>
+                            <div class="form-outline mb-4">
+
+                                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+
+                            </div>
+
+                            <!-- Checkbox -->
+
+
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="loginUser()">Login</button>
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="signOutUser()">SignOut</button>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+    
+
+        function signOutUser() {
+             window.location  = './SignOut.html';
+        }
+
+    function loginUser()
+    {
+      let user=document.getElementById("typeEmailX-2").value;
+        let pass = document.getElementById("typePasswordX-2").value;
+        var settings = {
+            "url": "https://localhost:44394/api/User/Login?Email=" + user + "&PassWord=" + pass + "",
+  "method": "GET",
+    "timeout": 0,
+   "dataType": 'json',
+};
+
+        $.ajax(settings).done(function (data, status, xhr) {
+            if (data.token =="-") {
+                alert("Email or Password is wrong");
+            } else {
+                localStorage.setItem("Token", data.token);
+                localStorage.setItem("Email", data.email);
+                window.location  = './UrlPage.html';
+            }
+            
+             
+});        
+     
+
+      /*if(user=='nianhu@gmail.com' && pass=='Aa123456@')
+      {
+        window.location  = './Admin_panel.html?version=Demo';
+      }
+      if(user=='adobe@gmail.com' && pass=='Aa123456@')
+      {
+        window.location  = './Admin_panel.html?version=Demo';
+      }*/
+    }
+
+    </script>
+
+</body>
+</html>

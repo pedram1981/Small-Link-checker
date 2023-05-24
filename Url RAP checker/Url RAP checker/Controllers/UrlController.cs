@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Url_RAP_checker.Models.Db;
 using Url_RAP_checker.Models.Url;
+using Url_RAP_checker.Module.Url;
 
 namespace Url_RPA_checker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UrlController : ControllerBase
     {
         private readonly URLContext _context;
@@ -20,94 +23,91 @@ namespace Url_RPA_checker.Controllers
         {
             _context = uRLContext;
         }
-        // GET: api/Urls    
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Url>>> GetUrl()
+          
+        //Show all url based on user's email adrres
+        [HttpGet("ShowAll")]
+        public async Task<ActionResult<IEnumerable<Url>>> GetUrl([FromQuery] string Email)
         {
-            return await _context.Url.ToListAsync();
-        }
-
-        // GET: api/Urls/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Url>> GetUrl(long id)
-        {
-            var url = await _context.Url.FindAsync(id);
-
-            if (url == null)
-            {
-                return NotFound();
-            }
-
+            var url =await _context.Url.Where(e => e.Email == Email)
+                .OrderByDescending(e => e.Id).ToListAsync();
             return url;
         }
 
-        // PUT: api/Urls/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUrl(long id, Url url)
+        //Update data
+        [HttpPut("update")]
+        public async Task<IActionResult> PutUrl([FromQuery] string Email,[FromQuery]string UrlCheck, Url url)
         {
-            if (id != url.Id)
+            var Id = await _context.Url.Where(e => e.Email == Email && e.UrlCheck == UrlCheck)
+               .Select(e => e.Id).FirstOrDefaultAsync();
+            url.LastTimeCheck = DateTime.Now;
+            Check c = new Check();
+            string result = await c.CheckUrl(url.UrlCheck);
+            url.ResultCheck = result;
+            if (0 < Id)
             {
-                return BadRequest();
+                UrlModel u = new UrlModel(_context);
+                url.ResultCheck = result;
+                bool r = await u.UpdateUrl(Id, url);
+                JsonResult j = new JsonResult(result);
+                return j;
             }
-
-            _context.Entry(url).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UrlExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+           
         }
 
-        // POST: api/Urls
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+    //check and save
+        [HttpPost("check")]
         public async Task<ActionResult<Url>> PostUrl(Url url)
         {
-            _context.Url.Add(url);
-            try
+            var Id =await _context.Url.Where(e => e.Email == url.Email && e.UrlCheck == url.UrlCheck)
+                .Select(e => e.Id).FirstOrDefaultAsync();
+            url.LastTimeCheck= DateTime.Now;
+            Check c = new Check();
+            string result = await c.CheckUrl(url.UrlCheck);
+            url.ResultCheck = result;
+            if (0<Id)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
+                UrlModel u = new UrlModel(_context);
+                bool r = await u.Update(Id, result);
+             }
+            else
             {
-                if (UrlExists(url.Id))
+                _context.Url.Add(url);
+                try
                 {
-                    return Conflict();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (UrlExists(url.Id))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
 
-            return CreatedAtAction("GetUrl", new { id = url.Id }, url);
+               
+            }
+            JsonResult j = new JsonResult(result);
+            return j;
         }
 
-        // DELETE: api/Urls/5
+        // DELETE
         [HttpDelete("Delete")]
         public async Task<ActionResult<Url>> DeleteUrl([FromBody] DeleteQueryObject req)
         {
-            UrlCrud U = new UrlCrud(_context);
+            UrlModel U = new UrlModel(_context);
             bool Result = await U.Delete(req.Id, req.Url);
             if (Result == false)
             {
-                return NotFound();
+                JsonResult json_ = new JsonResult("These id and url are not exist");
+                return json_;
             }
 
             return Ok();

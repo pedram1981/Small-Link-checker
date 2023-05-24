@@ -8,21 +8,21 @@ namespace Url_RAP_checker.Module.Url
 {
     public class Check
     {
-        public async Task<string> MyAction(string Link)
+        public async Task<string> CheckUrl(string Link)
         {
             try
             {
                 using var client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync(Link);
                 if (response.IsSuccessStatusCode)
-                    return "ok";
+                    return "Successful:"+response.StatusCode.ToString();
                 else
-                    return response.StatusCode.ToString();
+                    return "Error:"+response.StatusCode.ToString();
             }
             catch (Exception e)
             {
-                string ss = e.Message;
-                return "sss";
+                string ErrorMessage = e.Message;
+                return ErrorMessage;
             }
             
         }

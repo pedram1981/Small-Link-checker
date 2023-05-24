@@ -15,6 +15,7 @@ namespace Url_RAP_checker.Models.Db
         {
         }
 
+        public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<TimeCounter> TimeCounter { get; set; }
         public virtual DbSet<Url> Url { get; set; }
         public virtual DbSet<Users> Users { get; set; }
@@ -23,13 +24,22 @@ namespace Url_RAP_checker.Models.Db
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=URL;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Log>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Log1).HasColumnName("Log");
+            });
+
             modelBuilder.Entity<TimeCounter>(entity =>
             {
                 entity.HasNoKey();
@@ -50,8 +60,6 @@ namespace Url_RAP_checker.Models.Db
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.ResultCheck).HasMaxLength(300);
-
-                entity.Property(e => e.StatuseCheck).HasMaxLength(50);
 
                 entity.Property(e => e.UrlCheck)
                     .HasColumnName("urlCheck")

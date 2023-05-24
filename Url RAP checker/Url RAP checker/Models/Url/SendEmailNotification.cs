@@ -33,7 +33,7 @@ namespace Url_RAP_checker.Module.Url
             catch (Exception e)
             {
                 string ss = e.Message;
-                throw;
+                return false;
             }
             
             return true;

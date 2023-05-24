@@ -2,3 +2,12 @@
 
 # IDE0067: Dispose objects before losing scope
 dotnet_diagnostic.IDE0067.severity = none
+
+# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+dotnet_diagnostic.CS8632.severity = none
+
+# IDE0052: Remove unread private members
+dotnet_diagnostic.IDE0052.severity = none
+
+# IDE0060: Remove unused parameter
+dotnet_code_quality_unused_parameters = non_public:suggestion

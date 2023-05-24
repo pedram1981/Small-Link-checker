@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "Login.html",
+      "launchUrl": "LoginPage.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "Url_RAP_checker": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Login.html",
+      "launchUrl": "LoginPage.html",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

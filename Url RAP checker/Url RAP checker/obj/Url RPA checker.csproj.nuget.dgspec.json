@@ -42,6 +42,10 @@
               "target": "Package",
               "version": "[2.9.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "Microsoft.AspNetCore.StaticFiles": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -64,9 +68,17 @@
               "target": "Package",
               "version": "[3.0.0, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.10.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.10.0, )"
             }
           },
           "imports": [

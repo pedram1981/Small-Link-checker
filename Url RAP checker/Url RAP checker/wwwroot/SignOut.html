@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- start header -->
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="box-logo"><img src="img/logo.png" alt=""></div>
+
+
+
+
+        <div class="box-btns">
+            <button type="button" class="btn-outline-secondary" style="forced-color-adjust:red!important;" aria-label="Close" onclick=" window.location = './LoginPage.html';">Log in</button>
+        </div>
+    </header>
+    <section class="vh-100" style="background-color: #508bfc;">
+        <div class="container py-5 h-100" style="padding-top: 0px!important;">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">Sign Out</h3>
+                            <div class="col-1">
+                                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            </div>
+                            <div class="form-outline mb-2">
+
+                                <input type="email" class="form-control form-control-lg" id="typeEmailX-2" placeholder="name@example.com">
+
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Password</label>
+                            </div>
+                            <div class="form-outline mb-4">
+
+                                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+
+                            </div>
+
+                            <!-- Checkbox -->
+
+
+                           
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="SignOut();">Sign Out</button>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+        function SignOut() {
+            let user = document.getElementById("typeEmailX-2").value;
+            let pass = document.getElementById("typePasswordX-2").value;
+            if (pass.length >= 8) {
+                $.ajax({
+                    url: 'https://localhost:44394/api/User/Save',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType:'application/json',
+                    data: JSON.stringify({ Email: user, PassWord: pass }),
+                    success: function (response) {
+                        window.location = './LoginPage.html';
+                    },
+                    error: function (xhr, status, error) {
+                        alert("This email is exist");
+                    }
+                });
+            } else {
+                alert("Minimum passWord lenght must be 8 character");
+            }
+
+        }
+
+   
+
+    </script>
+
+</body>
+</html>

@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 using Url_RAP_checker.Module;
 using Microsoft.EntityFrameworkCore;
 using Url_RAP_checker.Models.Db;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 //using Url_RAP_checker.Models.Db;
 
 namespace Url_RAP_checker
@@ -29,9 +32,25 @@ namespace Url_RAP_checker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("AllowAllOrigins", builder =>
+            {
+                builder.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin();
+            }));
+            var Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("qwedrftgxcxckmklkm"));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = Key
+                });
             services.AddHostedService<TimedHostedService>();
             services.AddDbContext<URLContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            options.UseSqlServer(Configuration.GetConnectionString("DbCon")),ServiceLifetime.Scoped);
             services.AddControllers();
         }
 
@@ -49,9 +68,10 @@ namespace Url_RAP_checker
            
 
             app.UseRouting();
-
+            app.UseCors("AllowAllOrigins");
+            app.UseAuthentication();
             app.UseAuthorization();
-            
+           
 
             app.UseEndpoints(endpoints =>
             {

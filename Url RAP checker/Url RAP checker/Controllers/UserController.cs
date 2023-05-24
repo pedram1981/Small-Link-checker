@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Url_RAP_checker.Models.Db;
+using Url_RAP_checker.Models.User;
 using Url_RAP_checker.Module.Url;
 
 namespace Url_RAP_checker.Controllers
@@ -12,48 +15,43 @@ namespace Url_RAP_checker.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly URLContext _context;
+
+        public UserController(URLContext uRLContext)
+        {
+            _context = uRLContext;
+        }
         // GET: api/User
-        [HttpGet]
-        public async Task<string> Get()
+        [HttpGet("Login")]
+        public async Task<Token> GetLogin([FromQuery] Users user)
         {
-            Check c = new Check();
-            await c.MyAction("http://www.googlesdsa.com");
-            return "hello";
+            Login L = new Login(_context);
+            Token _Token = await L.LoginUser(user);
+            return _Token;
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<string> Get(int id)
+       // POST: api/User
+        [HttpPost("Save")]
+        public async Task<IActionResult> Post([FromBody] Users User)
         {
-            SendEmailNotification send = new SendEmailNotification();
-            string body1 = "<h3>Email verification Code</h3>" +
-    "<span style=\"color:#902cfe;\">URL BROKEN</span>" +
-    "<p style=\"color:#000000;\">Please check this Url,may be broken or some thing like this</p>";
-            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
-            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">";
-            body += "</HEAD><BODY><DIV>";
-            body += body1;
-            body += "</DIV></BODY></HTML>";
-            await send.SendEmail("pedram.azar60@gmail.com", "Url broken", body);
-            return "value";
+                 
+            if (UserExists(User.Email))
+            {
+                return Conflict();
+            }
+            else
+            {
+                _context.Users.Add(User);
+                await _context.SaveChangesAsync();
+                
+           }
+            return Ok() ;
         }
 
-        // POST: api/User
-        [HttpPost]
-        public void Post([FromBody] string value)
+        private bool UserExists(string Email)
         {
+            return _context.Users.Any(e => e.Email == Email);
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

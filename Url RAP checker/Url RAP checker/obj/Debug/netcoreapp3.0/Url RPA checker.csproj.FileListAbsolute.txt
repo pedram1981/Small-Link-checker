@@ -238,3 +238,4 @@ D:\company\MVC-email-asp\Url RAP checker\Url RAP checker\obj\Debug\netcoreapp3.0
 D:\company\MVC-email-asp\Url RAP checker\Url RAP checker\obj\Debug\netcoreapp3.0\Url RPA checker.csproj.CopyComplete
 D:\company\MVC-email-asp\Url RAP checker\Url RAP checker\obj\Debug\netcoreapp3.0\Url RPA checker.dll
 D:\company\MVC-email-asp\Url RAP checker\Url RAP checker\obj\Debug\netcoreapp3.0\Url RPA checker.pdb
+D:\company\MVC-email-asp\Url RAP checker\Url RAP checker\obj\Debug\netcoreapp3.0\Url RPA checker.csprojAssemblyReference.cache

@@ -17,7 +17,7 @@
 
         
         <div class="box-btns">
-            <button type="button" class="btn-outline-secondary" style="forced-color-adjust:red!important;" aria-label="Close" onclick=" window.location  = './Admin_panel.html?version='+version;">Log Out</button>
+            <button type="button" class="btn-outline-secondary" style="forced-color-adjust:red!important;" aria-label="Close" onclick="logout();">Log Out</button>
         </div>
     </header>
     <!-- end header -->
@@ -68,21 +68,7 @@
                                 </tr>
                             </thead>
                             <tbody id="data_view">
-                                <tr>
-                                    <td>1</td>
-                                    <td>google</td>
-                                    <td>http://www.google.com</td>
-                                    <td>sdas dsad asdasd sad sad sad asda sd</td>
-                                    <td>5213213 1321321321 </td>
-                                    <td>5</td>
-                                   
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Url_editModal" data-bs-whatever="1" style="margin-right: 5px;">
-                                            Edit
-                                        </button>
-                                        <button type="button" class="btn btn-outline-secondary" onclick="Delete(1,1);">Delete</button>
-                                    </td>
-                                </tr>
+                              
                             </tbody>
                         </table>
                 </div>
@@ -317,6 +303,11 @@ for (let i = 0; i < data.length; i++) {
                 });
         }
 
+        function logout() {
+             localStorage.setItem("Token", '-');
+                localStorage.setItem("Email", '-');
+            window.location = './LoginPage.html';
+        }
 
     </script>
 
